@@ -3,111 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Delivery App</title>
+    <title>Znton delivery App</title>
     <style>
+        /* General Body Styles */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2 {
-            text-align: center;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
             color: #333;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        button {
-            padding: 10px 15px;
-            background-color: #007bff;
+        /* Header Section */
+        .header {
+            background-color: #ff4c5b;
             color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container h2 {
+            text-align: left;
+            color: #ff4c5b;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #ff4c5b;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Restaurant List Styles */
+        .restaurant {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .restaurant:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .restaurant-info p {
+            margin: 5px 0;
+        }
+
+        .restaurant-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .restaurant-address {
+            color: #777;
+        }
+
+        .order-button {
+            background: #ff4c5b;
+            color: #fff;
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
+            font-size: 1rem;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .order-button:hover {
+            background: #e63e4d;
         }
 
-        ul {
-            list-style-type: none;
+        /* Menu Section */
+        .menu {
+            margin-top: 30px;
+        }
+
+        .menu h3 {
+            color: #ff4c5b;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .add-to-cart-button {
+            background: #007bff;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart-button:hover {
+            background: #0056b3;
+        }
+
+        /* Order Summary Section */
+        .order-summary {
+            margin-top: 30px;
+        }
+
+        .order-summary h2 {
+            color: #ff4c5b;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .order-summary ul {
+            list-style: none;
             padding: 0;
         }
 
-        li {
-            background: #f9f9f9;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        .order-summary ul li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .place-order-button {
+            background: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+
+        .place-order-button:hover {
+            background: #218838;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Zomato-like App</h1>
+    </div>
     <div class="container">
-        <h1>Local Delivery App</h1>
-        <form id="orderForm">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="address">Delivery Address:</label>
-            <input type="text" id="address" name="address" required>
-
-            <label for="item">Item to Deliver:</label>
-            <input type="text" id="item" name="item" required>
-
-            <button type="submit">Place Order</button>
-        </form>
-
-        <h2>Orders</h2>
-        <ul id="orderList"></ul>
+        <h2>Restaurants Near You</h2>
+        <div id="restaurants">
+            <!-- Restaurants will be dynamically added here -->
+        </div>
+        <div id="menu" class="menu" style="display: none;">
+            <h3>Menu</h3>
+            <div id="menuItems">
+                <!-- Menu items will be dynamically added here -->
+            </div>
+        </div>
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <ul id="orderSummary">
+                <li>No items in the cart yet.</li>
+            </ul>
+            <button class="place-order-button" onclick="placeOrder()">Place Order</button>
+        </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const orderForm = document.getElementById("orderForm");
-            const orderList = document.getElementById("orderList");
+        const restaurants = [
+            { id: 1, name: "Pizza Palace", address: "123 Main Street, City", menu: [
+                { name: "Margherita Pizza", price: 8 },
+                { name: "Pepperoni Pizza", price: 10 },
+                { name: "Veggie Pizza", price: 9 }
+            ] },
+            { id: 2, name: "Burger Barn", address: "456 Elm Street, City", menu: [
+                { name: "Cheeseburger", price: 6 },
+                { name: "Bacon Burger", price: 7 },
+                { name: "Veggie Burger", price: 5 }
+            ] },
+            { id: 3, name: "Sushi Spot", address: "789 Oak Avenue, City", menu: [
+                { name: "California Roll", price: 12 },
+                { name: "Spicy Tuna Roll", price: 14 },
+                { name: "Avocado Roll", price: 10 }
+            ] }
+        ];
 
-            orderForm.addEventListener("submit", (event) => {
-                event.preventDefault();
+        const cart = [];
 
-                const name = event.target.name.value;
-                const address = event.target.address.value;
-                const item = event.target.item.value;
-
-                const order = document.createElement("li");
-                order.textContent = `Name: ${name}, Address: ${address}, Item: ${item}`;
-                orderList.appendChild(order);
-
-                // Clear the form after submission
-                orderForm.reset();
+        const loadRestaurants = () => {
+            const restaurantContainer = document.getElementById('restaurants');
+            restaurants.forEach(restaurant => {
+                const restaurantElement = document.createElement('div');
+                restaurantElement.classList.add('restaurant');
+                restaurantElement.innerHTML = `
+                    <div class="restaurant-info">
+                        <p class="restaurant-name">${restaurant.name}</p>
+                        <p class="restaurant-address">${restaurant.address}</p>
+                    </div>
+                    <button class="order-button" onclick="viewMenu(${restaurant.id})">View Menu</button>
+                `;
+                restaurantContainer.appendChild(restaurantElement);
             });
-        });
+        };
+
+        const viewMenu = (restaurantId) => {
+            const restaurant = restaurants.find(r => r.id === restaurantId);
+            const menuContainer = document.getElementById('menuItems');
+            menuContainer.innerHTML = '';
+            restaurant.menu.forEach(item => {
+                const menuItemElement = document.createElement('div');
+                menuItemElement.classList.add('menu-item');
+                menuItemElement.innerHTML = `
+                    <p>${item.name} - $${item.price}</p>
+                    <button class="add-to-cart-button" onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
+                `;
+                menuContainer.appendChild(menuItemElement);
+            });
+            document.getElementById('menu').style.display = 'block';
+        };
+
+        const addToCart = (itemName, itemPrice) => {
+            cart.push({ name: itemName, price: itemPrice });
+            updateCart();
+        };
+
+        const updateCart = () => {
+            const orderSummary = document.getElementById('orderSummary');
+            orderSummary.innerHTML = '';
+            if (cart.length === 0) {
+                orderSummary.innerHTML = '<li>No items in the cart yet.</li>';
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('li');
+                    cartItem.textContent = `${item.name} - $${item.price}`;
+                    orderSummary.appendChild(cartItem);
+                });
+            }
+        };
+
+        const placeOrder = () => {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+            } else {
+                alert('Your order has been placed successfully!');
+                cart.length = 0;
+                updateCart();
+            }
+        };
+
+        loadRestaurants();
     </script>
 </body>
 </html>
