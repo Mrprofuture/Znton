@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Znton delivery App</title>
+    <title>Zomato-like App with Themes</title>
     <style>
-        /* General Body Styles */
+        /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ff7eb3, #ff758c);
-            color: #333;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Header Section */
         .header {
-            background-color: #ff4c5b;
-            color: white;
+            background-color: var(--header-bg);
+            color: var(--header-color);
             text-align: center;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
         }
 
         .header h1 {
@@ -32,33 +27,47 @@
             letter-spacing: 1px;
         }
 
-        /* Container Styles */
+        .theme-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 10px 15px;
+            background-color: var(--button-bg);
+            color: var(--button-color);
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
         .container {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 30px auto;
-            background: #fff;
+            background: var(--container-bg);
+            color: var(--container-color);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .container h2 {
+        h2 {
             text-align: left;
-            color: #ff4c5b;
+            color: var(--accent-color);
             margin-bottom: 20px;
             font-size: 1.8rem;
-            border-bottom: 2px solid #ff4c5b;
+            border-bottom: 2px solid var(--accent-color);
             display: inline-block;
             padding-bottom: 5px;
         }
 
-        /* Restaurant List Styles */
+        /* Restaurant List */
         .restaurant {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             margin-bottom: 15px;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -76,157 +85,87 @@
         .restaurant-name {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #333;
-        }
-
-        .restaurant-address {
-            color: #777;
         }
 
         .order-button {
-            background: #ff4c5b;
-            color: #fff;
+            background: var(--button-bg);
+            color: var(--button-color);
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .order-button:hover {
-            background: #e63e4d;
+            background: var(--button-hover-bg);
+            color: var(--button-hover-color);
         }
 
-        /* Menu Section */
-        .menu {
-            margin-top: 30px;
+        /* Theme Variables */
+        :root {
+            --header-bg: #ff4c5b;
+            --header-color: white;
+            --container-bg: white;
+            --container-color: #333;
+            --accent-color: #ff4c5b;
+            --button-bg: #007bff;
+            --button-color: white;
+            --button-hover-bg: #0056b3;
+            --button-hover-color: white;
+            --border-color: #ddd;
         }
 
-        .menu h3 {
-            color: #ff4c5b;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+        /* Dark Theme */
+        body.dark {
+            --header-bg: #1e1e2f;
+            --header-color: #f0f0f0;
+            --container-bg: #2a2a3c;
+            --container-color: #f0f0f0;
+            --accent-color: #ff5757;
+            --button-bg: #4444ff;
+            --button-color: white;
+            --button-hover-bg: #2222aa;
+            --button-hover-color: white;
+            --border-color: #444;
         }
 
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .menu-item p {
-            margin: 5px 0;
-            font-size: 1.1rem;
-        }
-
-        .add-to-cart-button {
-            background: #007bff;
-            color: #fff;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .add-to-cart-button:hover {
-            background: #0056b3;
-        }
-
-        /* Order Summary Section */
-        .order-summary {
-            margin-top: 30px;
-        }
-
-        .order-summary h2 {
-            color: #ff4c5b;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-        }
-
-        .order-summary ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .order-summary ul li {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .place-order-button {
-            background: #28a745;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 15px;
-        }
-
-        .place-order-button:hover {
-            background: #218838;
+        /* Vibrant Theme */
+        body.vibrant {
+            --header-bg: #ff7eb3;
+            --header-color: white;
+            --container-bg: #fff7e6;
+            --container-color: #333;
+            --accent-color: #ff758c;
+            --button-bg: #ff4c5b;
+            --button-color: white;
+            --button-hover-bg: #e63e4d;
+            --button-hover-color: white;
+            --border-color: #ffb3b3;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Zomato-like App</h1>
+        <button class="theme-switcher" onclick="switchTheme()">Switch Theme</button>
     </div>
     <div class="container">
         <h2>Restaurants Near You</h2>
         <div id="restaurants">
             <!-- Restaurants will be dynamically added here -->
         </div>
-        <div id="menu" class="menu" style="display: none;">
-            <h3>Menu</h3>
-            <div id="menuItems">
-                <!-- Menu items will be dynamically added here -->
-            </div>
-        </div>
-        <div class="order-summary">
-            <h2>Order Summary</h2>
-            <ul id="orderSummary">
-                <li>No items in the cart yet.</li>
-            </ul>
-            <button class="place-order-button" onclick="placeOrder()">Place Order</button>
-        </div>
     </div>
     <script>
+        // Mock restaurant data
         const restaurants = [
-            { id: 1, name: "Pizza Palace", address: "123 Main Street, City", menu: [
-                { name: "Margherita Pizza", price: 8 },
-                { name: "Pepperoni Pizza", price: 10 },
-                { name: "Veggie Pizza", price: 9 }
-            ] },
-            { id: 2, name: "Burger Barn", address: "456 Elm Street, City", menu: [
-                { name: "Cheeseburger", price: 6 },
-                { name: "Bacon Burger", price: 7 },
-                { name: "Veggie Burger", price: 5 }
-            ] },
-            { id: 3, name: "Sushi Spot", address: "789 Oak Avenue, City", menu: [
-                { name: "California Roll", price: 12 },
-                { name: "Spicy Tuna Roll", price: 14 },
-                { name: "Avocado Roll", price: 10 }
-            ] }
+            { id: 1, name: "Pizza Palace", address: "123 Main Street, City" },
+            { id: 2, name: "Burger Barn", address: "456 Elm Street, City" },
+            { id: 3, name: "Sushi Spot", address: "789 Oak Avenue, City" }
         ];
 
-        const cart = [];
-
+        // Load restaurants
         const loadRestaurants = () => {
             const restaurantContainer = document.getElementById('restaurants');
             restaurants.forEach(restaurant => {
@@ -235,59 +174,26 @@
                 restaurantElement.innerHTML = `
                     <div class="restaurant-info">
                         <p class="restaurant-name">${restaurant.name}</p>
-                        <p class="restaurant-address">${restaurant.address}</p>
+                        <p>${restaurant.address}</p>
                     </div>
-                    <button class="order-button" onclick="viewMenu(${restaurant.id})">View Menu</button>
+                    <button class="order-button">Order Now</button>
                 `;
                 restaurantContainer.appendChild(restaurantElement);
             });
         };
 
-        const viewMenu = (restaurantId) => {
-            const restaurant = restaurants.find(r => r.id === restaurantId);
-            const menuContainer = document.getElementById('menuItems');
-            menuContainer.innerHTML = '';
-            restaurant.menu.forEach(item => {
-                const menuItemElement = document.createElement('div');
-                menuItemElement.classList.add('menu-item');
-                menuItemElement.innerHTML = `
-                    <p>${item.name} - $${item.price}</p>
-                    <button class="add-to-cart-button" onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
-                `;
-                menuContainer.appendChild(menuItemElement);
-            });
-            document.getElementById('menu').style.display = 'block';
+        // Theme switching logic
+        const themes = ['default', 'dark', 'vibrant'];
+        let currentThemeIndex = 0;
+
+        const switchTheme = () => {
+            const body = document.body;
+            body.classList.remove(...themes);
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            body.classList.add(themes[currentThemeIndex]);
         };
 
-        const addToCart = (itemName, itemPrice) => {
-            cart.push({ name: itemName, price: itemPrice });
-            updateCart();
-        };
-
-        const updateCart = () => {
-            const orderSummary = document.getElementById('orderSummary');
-            orderSummary.innerHTML = '';
-            if (cart.length === 0) {
-                orderSummary.innerHTML = '<li>No items in the cart yet.</li>';
-            } else {
-                cart.forEach(item => {
-                    const cartItem = document.createElement('li');
-                    cartItem.textContent = `${item.name} - $${item.price}`;
-                    orderSummary.appendChild(cartItem);
-                });
-            }
-        };
-
-        const placeOrder = () => {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-            } else {
-                alert('Your order has been placed successfully!');
-                cart.length = 0;
-                updateCart();
-            }
-        };
-
+        // Initialize
         loadRestaurants();
     </script>
 </body>
